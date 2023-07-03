@@ -1,0 +1,44 @@
+{
+  "users": [
+    {
+      "name": "SAN 1",
+      "age": "20",
+      "place": "Delhi",
+      "batch": "WEB-13",
+      "profession": "FRONT-END",
+      "id": 1
+    },
+    {
+      "name": "SAN 2",
+      "age": "21",
+      "place": "Mumbai",
+      "batch": "WEB-14",
+      "profession": "FRONT-END",
+      "id": 2
+    },
+    {
+      "name": "SAN 3",
+      "age": "23",
+      "place": "Finland",
+      "batch": "WEB-15",
+      "profession": "STUDENT",
+      "id": 3
+    },
+    {
+      "name": "SAN 4",
+      "age": "24",
+      "place": "Kolkata",
+      "batch": "WEB-13",
+      "profession": "BACK-END",
+      "id": 4
+    },
+    {
+      "name": "SAN 5",
+      "age": "25",
+      "place": "Mumbai",
+      "batch": "WEB-13",
+      "profession": "FSD",
+      "id": 5
+    }
+  ]
+}

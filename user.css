@@ -1,0 +1,105 @@
+* {
+  margin: 0;
+  padding: 0;
+}
+.gradient {
+  width: 100vw;
+  height: 100vh;
+  background: linear-gradient(334deg, #fa9eff, #baff92, #faa2cb);
+  background-size: 180% 180%;
+  animation: gradient-animation 6s ease infinite;
+}
+
+@keyframes gradient-animation {
+  0% {
+    background-position: 0% 50%;
+  }
+  50% {
+    background-position: 100% 50%;
+  }
+  100% {
+    background-position: 0% 50%;
+  }
+}
+
+h1 {
+  text-align: center;
+  color: rgb(255, 255, 255);
+  margin-bottom: 20px;
+}
+
+#registration-form {
+  max-width: 600px;
+  margin: 0 auto;
+  background-color: #c9e3f1;
+  padding: 20px;
+  border-radius: 10px;
+}
+
+#registration-form label {
+  display: block;
+  margin-bottom: 10px;
+}
+
+#registration-form input,
+#registration-form select {
+  width: 100%;
+  padding: 10px;
+  border: none;
+  border-radius: 5px;
+  margin-bottom: 20px;
+  box-sizing: border-box;
+  font-size: 16px;
+}
+
+#registration-form button {
+  background-color: #015871;
+  color: #fff;
+  border: none;
+  border-radius: 5px;
+  padding: 10px 20px;
+  font-size: 16px;
+  cursor: pointer;
+  transition: all 0.3s ease;
+  display: block;
+  margin: 0 auto;
+}
+
+#registration-form button:hover {
+  background-color: #fff;
+  color: #015871;
+}
+
+button {
+  padding: 10px;
+  margin-top: 40px;
+  border-radius: 5px;
+  border: none;
+  background-color: #fff;
+  color: #015871;
+  font-size: 20px;
+  font-weight: 200px;
+  cursor: pointer;
+  text-align: center;
+  align-items: center;
+}
+
+button:hover {
+  background-color: orange;
+}
+
+a {
+  display: block;
+  margin: 20px auto;
+  text-align: center;
+}
+
+a button {
+  display: inline-block;
+  margin: 0 auto;
+}
+
+h3 {
+  text-align: center;
+  color: #ffffff;
+}

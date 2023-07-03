@@ -1,0 +1,292 @@
+<!DOCTYPE html>
+<html lang="en">
+  <head>
+    <meta charset="UTF-8" />
+    <meta http-equiv="X-UA-Compatible" content="IE=edge" />
+    <meta name="viewport" content="width=device-width, initial-scale=1.0" />
+    <title>Data Section</title>
+
+    <style>
+      body,
+      html {
+        width: 100%;
+        height: 100%;
+        padding: 0;
+        margin: 0;
+      }
+
+      body {
+        display: flex;
+        flex-direction: column;
+        align-items: center;
+        background: linear-gradient(
+          318deg,
+          #ff0062,
+          #ffff00,
+          #00ff00,
+          #8bffff,
+          #0000ff
+        );
+        background-size: 1000% 1000%;
+
+        -webkit-animation: Coolgradient 41s linear infinite;
+        -moz-animation: Coolgradient 41s linear infinite;
+        -o-animation: Coolgradient 41s linear infinite;
+        animation: Coolgradient 41s linear infinite;
+      }
+
+      @-webkit-keyframes Coolgradient {
+        0% {
+          background-position: 5% 0%;
+        }
+        50% {
+          background-position: 96% 100%;
+        }
+        100% {
+          background-position: 5% 0%;
+        }
+      }
+      @-moz-keyframes Coolgradient {
+        0% {
+          background-position: 5% 0%;
+        }
+        50% {
+          background-position: 96% 100%;
+        }
+        100% {
+          background-position: 5% 0%;
+        }
+      }
+      @-o-keyframes Coolgradient {
+        0% {
+          background-position: 5% 0%;
+        }
+        50% {
+          background-position: 96% 100%;
+        }
+        100% {
+          background-position: 5% 0%;
+        }
+      }
+      @keyframes Coolgradient {
+        0% {
+          background-position: 5% 0%;
+        }
+        50% {
+          background-position: 96% 100%;
+        }
+        100% {
+          background-position: 5% 0%;
+        }
+      }
+
+      .card {
+        display: flex;
+        flex-direction: column;
+        width: calc(25% - 20px);
+        height: 450;
+        background-color: white;
+        margin: 10px;
+        border-radius: 10px;
+        box-shadow: 0px 0px 10px rgba(0, 0, 0, 0.2);
+      }
+
+      .card img {
+        width: 100%;
+        height: 60%;
+        object-fit: cover;
+        border-top-left-radius: 10px;
+        border-top-right-radius: 10px;
+      }
+
+      h1 {
+        text-align: center;
+        color: antiquewhite;
+        font-size: 45px;
+        margin-top: 30px;
+        margin-bottom: 30px;
+      }
+
+      .card h2 {
+        margin: 10px;
+        font-size: 18px;
+        color: #333;
+      }
+
+      .card p {
+        margin: 10px;
+        font-size: 14px;
+        color: #777;
+      }
+
+      .male {
+        background-image: url("profile2.png");
+      }
+
+      .female {
+        background-image: url("profile2.png");
+      }
+    </style>
+  </head>
+  <body>
+    <h1>Data Section</h1>
+    <div id="form-container" style="display: none">
+      <input type="text" id="profession" />
+      <button id="submit-btn">Submit</button>
+    </div>
+  </body>
+</html>
+
+<script>
+  async function fetchData() {
+    let response = await fetch("http://localhost:3000/users");
+    let data = await response.json();
+    return data;
+  }
+
+  async function deleteCard(id) {
+    let response = await fetch(`http://localhost:3000/users/${id}`, {
+      method: "DELETE",
+    });
+    let result = await response.json();
+
+    let card = document.getElementById(id);
+    card.remove();
+  }
+
+  async function editCard(id) {
+    let response = await fetch(`http://localhost:3000/users/${id}`);
+    let data = await response.json();
+
+    let form = document.getElementById("form-container");
+    form.style.display = "block";
+
+    let professionInput = document.getElementById("profession");
+    professionInput.value = data.profession;
+
+    let submitBtn = document.getElementById("submit-btn");
+    submitBtn.addEventListener("click", async (event) => {
+      event.preventDefault();
+
+      let updatedData = {
+        profession: professionInput.value,
+      };
+
+      let response = await fetch(`http://localhost:3000/users/${id}`, {
+        method: "PATCH",
+        headers: {
+          "Content-Type": "application/json",
+        },
+        body: JSON.stringify(updatedData),
+      });
+      let result = await response.json();
+
+      let profession = document.getElementById(`profession-${id}`);
+      profession.textContent = `Profession: ${updatedData.profession}`;
+
+      form.style.display = "none";
+    });
+  }
+
+  async function createCards() {
+    let users = await fetchData();
+
+    let container = document.createElement("div");
+    container.style.display = "flex";
+    container.style.flexWrap = "wrap";
+    container.style.marginTop = "20px";
+
+    users.forEach((user) => {
+      let card = document.createElement("div");
+      card.id = user.id;
+      card.className = "card";
+
+      let img = document.createElement("img");
+      img.src = user.gender === "male" ? "profile2.png" : "profile2.png";
+      img.alt = "Profile Picture";
+
+      let name = document.createElement("h2");
+      name.textContent = user.name;
+
+      let age = document.createElement("p");
+      age.textContent = `Age: ${user.age}`;
+
+      let place = document.createElement("p");
+      place.textContent = `Place: ${user.place}`;
+
+      let batch = document.createElement("p");
+      batch.textContent = `Batch: ${user.batch}`;
+
+      let profession = document.createElement("p");
+      profession.id = `profession-${user.id}`;
+      profession.textContent = `Profession: ${user.profession}`;
+
+      let deleteBtn = document.createElement("button");
+      deleteBtn.style.width = "80px";
+      deleteBtn.style.height = "30px";
+      deleteBtn.style.backgroundColor = "#fff";
+      deleteBtn.style.color = "#8B00FF";
+      deleteBtn.style.borderRadius = "5px";
+      deleteBtn.style.border = "2px solid #8B00FF";
+      deleteBtn.style.marginTop = "10px";
+      deleteBtn.style.marginLeft = "40px";
+      deleteBtn.stylemargin = "10px";
+      deleteBtn.textContent = "Delete";
+      deleteBtn.style.transition = "background-color 0.3s";
+
+      deleteBtn.addEventListener("mouseover", function () {
+        deleteBtn.style.backgroundColor = "#8B00FF";
+        deleteBtn.style.color = "#fff";
+      });
+
+      deleteBtn.addEventListener("mouseout", function () {
+        deleteBtn.style.backgroundColor = "#fff";
+        deleteBtn.style.color = "#8B00FF";
+      });
+
+      deleteBtn.addEventListener("click", async () => {
+        await deleteCard(user.id);
+      });
+
+      let editBtn = document.createElement("button");
+      editBtn.style.width = "80px";
+      editBtn.style.height = "30px";
+      editBtn.style.backgroundColor = "#fff";
+      editBtn.style.color = "#8B00FF";
+      editBtn.style.borderRadius = "5px";
+      editBtn.style.border = "2px solid #8B00FF";
+      editBtn.style.marginLeft = "40px";
+      editBtn.textContent = "Edit";
+      editBtn.style.transition = "background-color 0.3s";
+
+      editBtn.addEventListener("mouseover", function () {
+        editBtn.style.backgroundColor = "#8B00FF";
+        editBtn.style.color = "#fff";
+      });
+
+      editBtn.addEventListener("mouseout", function () {
+        editBtn.style.backgroundColor = "#fff";
+        editBtn.style.color = "#8B00FF";
+      });
+
+      editBtn.addEventListener("click", async () => {
+        await editCard(user.id);
+      });
+
+      card.appendChild(img);
+      card.appendChild(name);
+      card.appendChild(age);
+      card.appendChild(place);
+      card.appendChild(batch);
+      card.appendChild(profession);
+      card.appendChild(deleteBtn);
+      card.appendChild(editBtn);
+
+      container.appendChild(card);
+    });
+
+    document.body.appendChild(container);
+  }
+
+  createCards();
+</script>

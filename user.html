@@ -1,0 +1,46 @@
+<!DOCTYPE html>
+<html lang="en">
+  <head>
+    <meta charset="UTF-8" />
+    <meta name="viewport" content="width=device-width, initial-scale=1.0" />
+    <title>Users Section</title>
+    <link rel="stylesheet" href="user.css" />
+  </head>
+  <body>
+    <div class="gradient">
+      <h1>User Registraion Form</h1>
+      <form id="registration-form">
+        <label for="name">Name:</label>
+        <input type="text" id="name" name="name" required />
+
+        <label for="age">Age:</label>
+        <input type="number" id="age" name="age" required />
+
+        <label for="palce">Place:</label>
+        <input type="text" id="place" name="place" required />
+
+        <label for="batch">Batch Name:</label>
+        <select name="batch" id="batch">
+          <option value="WEB-13">WEB-13</option>
+          <option value="WEB-14">WEB-14</option>
+          <option value="WEB-15">WEB-15</option>
+        </select>
+
+        <label for="profession">Profession:</label>
+        <select name="profession" id="profession">
+          <option value="FSD">FSD</option>
+          <option value="FRONTEND">FRONT-END</option>
+          <option value="BACKEND">BACK-END</option>
+          <option value="STUDENT">STUDENT</option>
+        </select>
+
+        <button type="submit">Submit</button>
+      </form>
+      <a href="admin.html">
+        <button>Admin Section</button>
+      </a>
+      <h3>ONLY FOR ADMINS</h3>
+    </div>
+    <script src="user.js"></script>
+  </body>
+</html>
